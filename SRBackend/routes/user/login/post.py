@@ -1,28 +1,31 @@
 from database.models.user import User
 from database.main import session
+from sqlalchemy import exc
+import json
 
 def handler(self):
-    if hasattr(a, 'jsonData'):
-        self.send_response(404, 'JSON data was not found!')
+    if not hasattr(self, 'jsonData'):
+        self.send_error(404, 'JSON data was not found!')
         return
 
-    if not self.jsonData['email']:
-        self.send_response(404, 'email parameter was not found!')
+    if 'email' not in self.jsonData:
+        self.send_error(400, 'MISSING_EMAIL_FIELD')
         return
 
-    if not self.jsonData['password']:
-        self.send_response(404, 'password parameter was not found!')
+    if 'password' not in self.jsonData:
+        self.send_error(400, 'MISSING_PASSWORD_FIELD')
         return
 
 
-    user = session.query(User, User.email, post_data['email'])
-    if user.login(password):
+    user = session.query(User).filter_by(email=self.jsonData['email']).first()
+    if user.login(self.jsonData['password']):
         try:
-            session.update(user)
-            session.commit()
-            self.status(200)
-            self.wfile.write(user)
+            userDict = user.as_dict()
+            del userDict['_password'], userDict['_salt']
+            self.sendResponse(200, str(json.dumps(userDict)))
         except exc.SQLAlchemyError as e:
-            self.status(500)
+            self.send_error(500, str(e.__dict__['orig']))
             session.rollback()
-    self.status(400)
+    else:
+        self.send_error(400, 'INVALID_PASSWORD')
+        session.rollback()

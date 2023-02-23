@@ -10,8 +10,7 @@ class Server(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(message.encode() if isinstance(message, str) else (json.dumps(message)))
-        self.end_headers()
+        self.wfile.write(message.encode() if isinstance(message, str) else (str(json.dumps(message)).encode()))
 
     def do_HEAD(self):
         return

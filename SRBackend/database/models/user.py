@@ -28,10 +28,10 @@ class User(Base):
         self.password = password
 
     def checkPassword(self, password):
-        return self._password == hashlib.sha512(password + self._salt).hexdigest()
+        return self._password == hashlib.sha512((password + self._salt).encode('utf-8')).hexdigest()
 
     def login(self, password):
         if self.checkPassword(password):
-            self.loginToken = uuid.uuid4()
-            return true
-        return false
+            self.loginToken = str(uuid.uuid4())
+            return True
+        return False

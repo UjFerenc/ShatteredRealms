@@ -4,11 +4,9 @@ from sqlalchemy import exc
 import json
 import uuid
 
-middleware = ['']
-
 def handler(self):
-    if not self.jsonData:
-        self.send_error(400, 'MISSING_BODY')
+    if not hasattr(self, 'jsonData'):
+        self.sendResponse(404, 'JSON data was not found!')
         return
 
     if 'email' not in self.jsonData:

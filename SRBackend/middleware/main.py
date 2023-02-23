@@ -14,7 +14,6 @@ for source in sources:
         if middleware == '__pycache__':
             continue
 
-        print(('./middleware/{}/{}'.format(source, middleware)).replace('/', '.')[2:-3])
         middlewareImport = importlib.import_module(('./middleware/{}/{}'.format(source, middleware)).replace('/', '.')[2:-3])
 
         if middleware[:-3] in middlewares:
