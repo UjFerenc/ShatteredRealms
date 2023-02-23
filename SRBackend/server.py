@@ -1,9 +1,18 @@
 from http.server import BaseHTTPRequestHandler
-
 from routes.main import routes
+from database import main
+from middleware.main import middlewares
 
+import json
 
 class Server(BaseHTTPRequestHandler):
+    def sendResponse(self, code, message):
+        self.send_response(code)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(message.encode() if isinstance(message, str) else (json.dumps(message)))
+        self.end_headers()
+
     def do_HEAD(self):
         return
 
@@ -44,6 +53,18 @@ class Server(BaseHTTPRequestHandler):
                     break
 
             if match:
-                if pathVariables.keys().__len__() > 0:
-                    return route['handler'](self, pathVariables)
-                route['handler'](self)
+                self.pathVariables = pathVariables if pathVariables else {}
+                if self.headers['Content-Type'] == 'application/json' and self.headers['Content-Length']:
+                    try:
+                        self.jsonData = json.loads((self.rfile.read(int(self.headers['Content-Length'])).decode()))
+                    except json.decoder.JSONDecodeError as e:
+                        self.send_response(400)
+                        self.send_header("Content-type", "text/html")
+                        self.end_headers()
+                        self.wfile.write('INVALID_JSON'.encode())
+                        return
+                for middleware in route['middlewares']:
+                    if not middlewares[middleware]():
+                        return
+                return route['handler'](self)
+

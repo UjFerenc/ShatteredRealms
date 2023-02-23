@@ -1,5 +1,4 @@
-import importlib
-import os.path
+import importlib, os.path
 
 routes = []
 
@@ -7,7 +6,7 @@ def listdirs(folder):
     return [d for d in os.listdir(folder) if os.path.isdir(os.path.join(folder, d))]
 
 
-def recursivePathFinding(path, root = ''):
+def recursivePathFinding(path, root=''):
     if root == '':
         root = path
     if path.split('/')[-1:] == 'var':
@@ -24,7 +23,8 @@ def recursivePathFinding(path, root = ''):
                 routes.append({
                     'path': path[root.__len__():].replace('var/', ':'),
                     'method': method,
-                    'handler': hanlderImport.handler
+                    'handler': hanlderImport.handler,
+                    'middlewares': hanlderImport.middleswares if hasattr(hanlderImport, 'middlewares') else {}
                 })
             else:
                 print('\033[93mFile: "{}" exists, but has no handler function!\033[0m'.format(filePath))
