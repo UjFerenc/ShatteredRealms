@@ -1,8 +1,8 @@
+from sqlalchemy import exc
+
 from database.main import session
 from database.models.user import User
-from sqlalchemy import exc
-import json
-import uuid
+
 
 def handler(self):
     if not hasattr(self, 'jsonData'):
@@ -25,7 +25,7 @@ def handler(self):
     except exc.SQLAlchemyError as e:
         session.rollback()
         error = str(e.__dict__['orig'])
-        self.sendError(500, error)
+        self.send_error(500, error)
         return
 
     session.commit()

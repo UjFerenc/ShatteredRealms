@@ -3,6 +3,7 @@ from database.main import session
 from sqlalchemy import exc
 import json
 
+
 def handler(self):
     if not hasattr(self, 'jsonData'):
         self.send_error(404, 'JSON data was not found!')
@@ -15,7 +16,6 @@ def handler(self):
     if 'password' not in self.jsonData:
         self.send_error(400, 'MISSING_PASSWORD_FIELD')
         return
-
 
     user = session.query(User).filter_by(email=self.jsonData['email']).first()
     if user.login(self.jsonData['password']):
