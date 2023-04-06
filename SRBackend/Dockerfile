@@ -14,6 +14,4 @@ COPY . /app
 
 ENTRYPOINT [ "python3" ]
 
-EXPOSE 80
-
 CMD [ "main.py" ]

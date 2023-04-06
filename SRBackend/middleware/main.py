@@ -1,4 +1,5 @@
-import os, importlib
+import importlib
+import os
 
 middlewares = {}
 
@@ -8,9 +9,9 @@ for source in sources:
     if source == '__pycache__':
         continue
 
-    sourcedMidlewares = os.listdir('./middleware/' + source)
+    sourced_middlewares = os.listdir('./middleware/' + source)
 
-    for middleware in sourcedMidlewares:
+    for middleware in sourced_middlewares:
         if middleware == '__pycache__':
             continue
 

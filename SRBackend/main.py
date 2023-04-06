@@ -1,18 +1,6 @@
-import threading
-import time
-from http.server import HTTPServer
+from fastapi import FastAPI
+from routing.main import recursive_path_finding
 
-from server import Server
+app = FastAPI(title='ShatteredRealms API')
 
-HOST_NAME = "0.0.0.0"
-PORT_NUMBER = 80
-
-if __name__ == '__main__':
-    httpd = HTTPServer((HOST_NAME, PORT_NUMBER), Server)
-    print(time.asctime(), 'Server Starts - %s:%s' % (HOST_NAME, PORT_NUMBER))
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    httpd.server_close()
-    print(time.asctime(), 'Server Stops - %s:%s' % (HOST_NAME, PORT_NUMBER))
+recursive_path_finding(app, './routing/routes')

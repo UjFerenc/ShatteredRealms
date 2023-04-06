@@ -2,6 +2,7 @@ from database.main import session
 from database.models.user import User
 from sqlalchemy import exc
 
+
 def check(self):
     if not 'Authorization' in self.headers or not 'Bearer ' in self.headers['Authorization']:
         self.send_response(404, 'Login token was not found')
