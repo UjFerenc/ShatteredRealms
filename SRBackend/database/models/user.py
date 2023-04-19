@@ -13,6 +13,7 @@ class User(Base):
     _password: Mapped[str] = mapped_column(String(256))
     _salt: Mapped[str] = mapped_column(String(256))
     loginToken = mapped_column(String(10), default=lambda: str(uuid.uuid4()))
+    
 
     @hybrid_property
     def password(self):
