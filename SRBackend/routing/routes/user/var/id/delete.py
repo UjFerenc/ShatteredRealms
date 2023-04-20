@@ -1,11 +1,12 @@
 from sqlalchemy.orm import exc
-from fastapi import status, Response
+from fastapi import status, Response, Depends
+from dependencies.Authentication.getCurrentUser import get_current_user
 
 from database.main import session
 from database.models.user import User
 
 tags = ["user"]
-
+dependencies = [Depends(get_current_user)]
 
 def handler(id: str, response: Response):
     try:

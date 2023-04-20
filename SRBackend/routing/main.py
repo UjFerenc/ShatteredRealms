@@ -35,9 +35,11 @@ def recursive_path_finding(app, path, root=''):
             handler_import = importlib.import_module((path + '/' + method).replace('/', '.')[2:])
             if not hasattr(handler_import, 'tags'):
                 handler_import.tags = ["default"]
+            if not hasattr(handler_import, 'dependencies'):
+                handler_import.dependencies = []
             if hasattr(handler_import, 'handler'):
                 endpoint_path = replace_path_variables(path, root)
-                getattr(app, method)(endpoint_path, tags=handler_import.tags)(handler_import.handler)
+                getattr(app, method)(endpoint_path, tags=handler_import.tags, dependencies=handler_import.dependencies)(handler_import.handler)
 
             else:
                 print('\033[93mFile: "{}" exists, but has no handler function!\033[0m'.format(file_path))
