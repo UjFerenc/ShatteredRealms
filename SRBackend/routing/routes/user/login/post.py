@@ -1,6 +1,6 @@
-from fastapi import HTTPException, status, Response
+from fastapi import Response
 
-from database.models.user import User
+from database.models.User.user import User
 from database.main import session
 from sqlalchemy import exc
 
@@ -17,6 +17,7 @@ def handler(data: LoginPost, response: Response):
     if user.login(data.password):
         try:
             user_dict = user.as_dict()
+            user_dict['roles'] = list(map(lambda x: x.name, user.roles))
             del user_dict['_password'], user_dict['_salt']
             return user_dict
         except exc.SQLAlchemyError as e:

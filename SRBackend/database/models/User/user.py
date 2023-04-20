@@ -1,18 +1,30 @@
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import List
+
+from sqlalchemy import String, Table, Column, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.hybrid import hybrid_property
 from database.base import Base
 
 import hashlib, uuid
 
+from database.models.User.roles import Role
+
+role_association_table = Table(
+    'role-association_table',
+    Base.metadata,
+    Column('user_id', ForeignKey('users.id'), primary_key=True),
+    Column('role_id', ForeignKey('roles.id'), primary_key=True)
+)
+
 class User(Base):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 
     id = mapped_column(String(10), default=lambda: str(uuid.uuid4()), primary_key=True)
     email: Mapped[str] = mapped_column(String(30), unique=True)
     _password: Mapped[str] = mapped_column(String(256))
     _salt: Mapped[str] = mapped_column(String(256))
     loginToken = mapped_column(String(10), default=lambda: str(uuid.uuid4()))
+    roles: Mapped[List['Role']] = relationship(secondary=role_association_table)
     
 
     @hybrid_property
@@ -27,6 +39,7 @@ class User(Base):
     def __init__(self, email, password):
         self.email = email
         self.password = password
+        self.roles = [Role('user')]
 
     def checkPassword(self, password):
         return self._password == hashlib.sha512((password + self._salt).encode('utf-8')).hexdigest()
