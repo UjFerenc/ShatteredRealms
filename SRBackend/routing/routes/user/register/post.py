@@ -1,11 +1,11 @@
 from sqlalchemy import exc
-from fastapi import HTTPException, status, Response
+from fastapi import Response, HTTPException
 
 from database.main import session
-from database.models.user import User
+from database.models.User.user import User
 from routing.models.User.registerPost import RegisterPost
 
-tags = ["user"]
+tags = ['user']
 
 
 def handler(data: RegisterPost, response: Response):
@@ -17,9 +17,9 @@ def handler(data: RegisterPost, response: Response):
         session.commit()
     except exc.IntegrityError as e:
         session.rollback()
-        if "UNIQUE constraint failed: user.email" in str(e):
-            response.status_code = 400
-            return "EMAIL_ALREADY_EXISTS"
+        print(str(e))
+        if 'UNIQUE constraint failed: users.email' in str(e):
+            raise HTTPException(status_code=400, detail='EMAIL_ALREADY_EXISTS')
 
     session.commit()
     return 'USER_ADDED'

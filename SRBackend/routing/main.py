@@ -1,10 +1,6 @@
 import importlib
 import os.path
-
-
-def list_dirs(folder):
-    return [d for d in os.listdir(folder) if os.path.isdir(os.path.join(folder, d))]
-
+from utils.genericFunctions import list_dirs
 
 def replace_path_variables(path, root):
     endpoint_path = ''
@@ -34,7 +30,7 @@ def recursive_path_finding(app, path, root=''):
             # https://i.ytimg.com/vi/CZFKWt3S2Ys/maxresdefault.jpg
             handler_import = importlib.import_module((path + '/' + method).replace('/', '.')[2:])
             if not hasattr(handler_import, 'tags'):
-                handler_import.tags = ["default"]
+                handler_import.tags = ['default']
             if not hasattr(handler_import, 'dependencies'):
                 handler_import.dependencies = []
             if hasattr(handler_import, 'handler'):

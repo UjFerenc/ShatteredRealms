@@ -8,8 +8,8 @@ client = None
 
 def pytest_configure(config):
     print('pytest config started... ')
-    src_file = "./test/database/mydatabase.db"
-    dst_file = "./database"
+    src_file = './test/database/mydatabase.db'
+    dst_file = './database'
 
     if os.path.exists(dst_file + 'mydatabase.db'):
         os.remove(dst_file + 'mydatabase.db')
