@@ -6,6 +6,8 @@ from sqlalchemy import exc
 
 from routing.models.User.loginPost import LoginPost
 
+tags = ['user']
+
 
 def handler(data: LoginPost, response: Response):
     user = session.query(User).filter_by(email=data.email).first()
