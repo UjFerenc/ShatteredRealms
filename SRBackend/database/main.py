@@ -2,10 +2,11 @@ import importlib
 import os
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker
 from utils.genericFunctions import list_dirs
 
 from database.base import Base
+
 
 def recursive_model_finding(root):
     folderList = list_dirs(root)
@@ -18,10 +19,7 @@ def recursive_model_finding(root):
         modelList = os.listdir(root)
         for model in modelList:
             if '.py' in model:
-                importlib.import_module(f'{root[2:].replace("/",".")}.{model[:-3]}')
-
-
-
+                importlib.import_module(f'{root[2:].replace("/", ".")}.{model[:-3]}')
 
 
 recursive_model_finding('./database/models')
