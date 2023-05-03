@@ -5,7 +5,8 @@ import { LoreComponent } from './lore/lore.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
-  {path: "lore", component: LoreComponent}
+  {path: "lore", component: LoreComponent},
+  {path: "user", loadChildren:() => import('./user/user.module').then(m => m.UserModule)}
 ];
 
 @NgModule({

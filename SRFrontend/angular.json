@@ -30,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -41,6 +41,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/envronment.ts",
+                  "with": "src/environments/envronment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",

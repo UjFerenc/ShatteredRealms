@@ -1,11 +1,43 @@
+$primary: #E68E4D;
+$secondary: #AA8239;
+$warning: #FF6F91;
+$dark: #6E4424;
+$light: #FFC456;
+$text: #D4B16A;
 
 $theme-colors: (
-  "primarly": #AA8439,
-  "dark": #552600,
-  "light": #FFE3AA
+  "primarly": $primary,
+  "secondary": $secondary,
+  "dark": $dark,
+  "light": $light
 );
 
-$body-bg: #552600;
-$body-color: #D4B16A;
+$body-bg: $dark;
+$body-color: $text;
+$black: $dark;
+
+.ng-touched.ng-invalid{
+  color: $warning;
+  border-color: $warning;
+}
+.btn.btn-primary:hover, .btn:active.btn-primary:active, .btn:focus-visible.btn.btn-primary:focus-visible{
+  background-color: $light;
+  border-color: $light
+}
+.btn:focus-visible.btn.btn-primary:focus-visible {
+  box-shadow:0 0 0 0.25rem $text;
+}
+
+small.text-muted {
+  color: $light!important;
+}
+
+$input-bg: $dark;
+$input-color: $primary;
+$border-color: $light;
+$navbar-light-active-color: $light;
+$navbar-light-color: $text;
+$navbar-link-hover-color: $light;
 
 @import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/_navbar";
