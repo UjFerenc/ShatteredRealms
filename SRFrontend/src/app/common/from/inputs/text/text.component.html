@@ -1,0 +1,19 @@
+<label *ngIf="label" for="passwordInput">{{ label }}</label
+><label *ngIf="required" style="color: red">*</label>
+<input
+  [formControl]="formInput"
+  [type]="type ?? 'text'"
+  class="form-control"
+  aria-describedby="passwordHelp"
+  [placeholder]="placeholder"
+/>
+<div *ngIf="formInput.touched && formInput.errors; else helperDiv">
+  <small class="text-danger">{{
+    "INPUT.TEXT.ERRORS." + errorKey | translate : error
+  }}</small>
+</div>
+<ng-template #helperDiv>
+  <small *ngIf="helper !== null" class="form-text text-muted">{{
+    helper
+  }}</small>
+</ng-template>
