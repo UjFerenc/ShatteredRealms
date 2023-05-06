@@ -4,18 +4,29 @@
       <form class="border px-2 py-2 rounded border-primary">
         <h1>Login</h1>
         <div class="form-group">
-          <label for="emailInput">Email address</label>
-          <input [formControl]="loginForm.controls.email" type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="example@email.address">
-          <small id="emailHelp" class="form-text text-muted">Please enther a valid e-mail address</small>
+          <app-form-input-text
+            [formInput]="loginForm.controls.email"
+            label="Email"
+            helper="Please enter your email address"
+          >
+          </app-form-input-text>
         </div>
         <div class="form-group">
-          <label for="passwordInput">Password</label>
-          <input [formControl]="loginForm.controls.password" type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" placeholder="Password">
-          <small id="passwordHelp" class="form-text text-muted">Please enter a password</small>
+          <app-form-input-text
+            [formInput]="loginForm.controls.password"
+            label="Password"
+            type="password"
+            helper="Please enter your password"
+          >
+          </app-form-input-text>
         </div>
         <div>
-          <button class="btn btn-primary" (click)="login()" type="button">Login</button>
-          <button class="btn btn-secoundary" routerLink="/user/register">Register instead</button>
+          <button class="btn btn-primary" (click)="login()" type="button">
+            Login
+          </button>
+          <button class="btn btn-secoundary" routerLink="/user/register">
+            Register instead
+          </button>
         </div>
       </form>
     </div>

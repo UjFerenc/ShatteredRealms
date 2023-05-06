@@ -1,0 +1,11 @@
+{
+  "INPUT": {
+    "TEXT": {
+      "ERRORS": {
+        "required": "{{field_name}} is a required field!",
+        "minlength": "{{field_name}} must be at least {{requiredLength}} character long.",
+        "email": "{{field_name}} field must contain a valid email address"
+      }
+    }
+  }
+}

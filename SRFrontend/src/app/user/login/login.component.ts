@@ -1,38 +1,42 @@
 import { Component } from '@angular/core';
-import { UserService } from '../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { take } from 'rxjs';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
+
+import { TranslateService } from '@ngx-translate/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
-  emailControl = new FormControl('', Validators.required)
-  passwordControl = new FormControl('', Validators.required)
-
-  loginForm2 = new FormGroup({
-    email: this.emailControl,
-    password: this.passwordControl
-  })
-
-
   loginForm = new FormGroup({
-    email: new FormControl('', { nonNullable:true, validators: Validators.required }),
-    password: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(8)],
+    }),
   });
 
-  constructor(private _userService: UserService, private _router: Router) { }
+  constructor(
+    private _userService: UserService,
+    private _router: Router,
+    public translateService: TranslateService
+  ) {}
 
   login() {
     if (!this.loginForm.valid) {
-      return
+      return;
     }
-    
-    this._userService.login(this.loginForm.getRawValue()).pipe(take(1))
-      .subscribe(() => this._router.navigate(['/user/profile']))
+
+    this._userService
+      .login(this.loginForm.getRawValue())
+      .pipe(take(1))
+      .subscribe(() => this._router.navigate(['/user/profile']));
   }
 }
