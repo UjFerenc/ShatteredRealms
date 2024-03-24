@@ -1,13 +1,12 @@
-import importlib
+import hashlib
+import uuid
 from typing import List
 
 from sqlalchemy import String, Table, Column, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from database.base import Base
-
-import hashlib, uuid
-
 from database.models.User.roles import Role
 
 role_association_table = Table(
@@ -15,6 +14,13 @@ role_association_table = Table(
     Base.metadata,
     Column('user_id', ForeignKey('users.id'), primary_key=True),
     Column('role_id', ForeignKey('roles.id'), primary_key=True)
+)
+
+player_character_association_table = Table(
+    'player_characters-association_table',
+    Base.metadata,
+    Column('user_id', ForeignKey('users.id'), primary_key=True),
+    Column('player_character_id', ForeignKey('player_characters.id'), primary_key=True)
 )
 
 
@@ -27,6 +33,7 @@ class User(Base):
     _salt: Mapped[str] = mapped_column(String(256))
     loginToken = mapped_column(String(10), default=lambda: str(uuid.uuid4()))
     roles: Mapped[List['Role']] = relationship(secondary=role_association_table)
+    playerCharacters: Mapped[List['PlayerCharacter']] = relationship(secondary=player_character_association_table)
 
     @hybrid_property
     def password(self):
@@ -37,17 +44,28 @@ class User(Base):
         self._salt = uuid.uuid4().hex
         self._password = hashlib.sha512(password.encode('utf-8') + self._salt.encode('utf-8')).hexdigest()
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, is_admin=False):
         self.email = email
         self.password = password
 
         from database.main import session
         user_role = session.query(Role).filter_by(name='user').first()
-        print('HEREEEEEEEEEEEEEEEE', user_role)
         if user_role is None:
             user_role = Role('user')
 
-        self.roles = [user_role]
+        roles = [user_role]
+
+
+        if is_admin:
+            admin_role = session.query(Role).filter_by(name='admin').first()
+            if admin_role is None:
+                admin_role = Role('admin')
+            roles.append(admin_role)
+
+
+
+        self.roles = roles
+        self.characters = []
 
     def checkPassword(self, password):
         return self._password == hashlib.sha512((password + self._salt).encode('utf-8')).hexdigest()

@@ -5,17 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0decc3ce-7a65-441b-85a9-4b542188b4f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/database/models/User/playercharacters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routing/models/Character/characherCreatePost.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routing/routes/character/create/post.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Tests.Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/mydatabase.db-journal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SRFrontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SRFrontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/models/User/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/models/User/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependencies/Authentication/getCurrentUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/dependencies/Authentication/getCurrentUser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/routes/user/login/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/routing/routes/user/login/post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/routes/user/register/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/routing/routes/user/register/post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing/routes/user/var/id/delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/routing/routes/user/var/id/delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/database/mydatabase.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/database/mydatabase.db.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_user_delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_user_delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SRFrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SRFrontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SRFrontend/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../SRFrontend/src/app/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SRFrontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../SRFrontend/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -44,5 +61,16 @@
       <updated>1682756667681</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

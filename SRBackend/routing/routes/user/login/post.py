@@ -1,6 +1,6 @@
 from fastapi import Response
 
-from database.models.User.user import User
+from database.models.User.users import User
 from database.main import session
 from sqlalchemy import exc
 

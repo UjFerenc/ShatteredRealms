@@ -1,10 +1,11 @@
 from fastapi import HTTPException, Depends
 from fastapi.security.http import HTTPBearer
 
-from database.models.User.user import User
+from database.models.User.users import User
 from database.main import session
 
 get_bearer_token = HTTPBearer(auto_error=False)
+
 
 async def get_current_user(token: str = Depends(get_bearer_token)):
     if not token:

@@ -2,7 +2,7 @@ from sqlalchemy.orm import exc
 from fastapi import Response, Depends
 
 from database.main import session
-from database.models.User.user import User
+from database.models.User.users import User
 from dependencies.Authorization.isAdmin import is_admin
 
 tags = ['user']
