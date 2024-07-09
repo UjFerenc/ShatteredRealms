@@ -15,8 +15,8 @@
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a *ngIf="!loggedIn" class="nav-link" [ngClass]="{active: router.url === '/user/login'}" routerLink="/user/login">Login</a>
-          <a *ngIf="loggedIn" class="nav-link" [ngClass]="{active: router.url === '/user/profile'}" routerLink="/user/profile">Profile</a>
+          <a *ngIf="!loggedIn()" class="nav-link" [ngClass]="{active: router.url === '/user/login'}" routerLink="/user/login">Login</a>
+          <a *ngIf="loggedIn()" class="nav-link" [ngClass]="{active: router.url === '/user/profile'}" routerLink="/user/profile">Profile</a>
         </li>
       </ul>
     </div>

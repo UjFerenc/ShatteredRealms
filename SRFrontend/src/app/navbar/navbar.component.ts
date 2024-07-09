@@ -14,7 +14,7 @@ export class NavbarComponent implements OnDestroy {
   loggedIn: Signal<boolean>;
 
   constructor(public router: Router, private _userService: UserService) {
-    this.loggedIn = computed(() => this._userService.user !== null);
+    this.loggedIn = computed(() => this._userService.user() !== null);
   }
 
   ngOnDestroy() {

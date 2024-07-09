@@ -27,6 +27,7 @@ export class LoggedInGuard {
       return false;
     }
 
+    this._router.navigateByUrl('/login');
     return true;
   }
 }
